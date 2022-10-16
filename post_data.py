@@ -1,3 +1,4 @@
+import re
 post_data = [
     {
         "userId":  "Alex Gates",
@@ -38,6 +39,17 @@ post_data = [
 
 # Your Code Start from here
 
+def slugify(s):
+  s = s.lower().strip()
+  s = re.sub(r'[^\w\s-]', '', s)
+  s = re.sub(r'[\s_-]+', '-', s)
+  s = re.sub(r'^-+|-+$', '', s)
+  return s
+
+
+for item in post_data:
+    slug = slugify(' '.join(item['title'].split()[:3]))
+    item.update({"slug": slug})
 
 # Your code ends here
 
